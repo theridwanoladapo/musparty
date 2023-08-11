@@ -7,4 +7,3 @@ __pycache__/
 
 # npm
 node_modules/
-/static/frontend/
