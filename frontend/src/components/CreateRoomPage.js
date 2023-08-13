@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
+import withRouter from './withRouter'
 import {
     Avatar,
     Button,
     CssBaseline,
     TextField,
-    FormControl,
     FormLabel,
     FormControlLabel,
     Radio,
@@ -18,24 +18,10 @@ import {
 import EarbudsIcon from '@mui/icons-material/Earbuds'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
-function Copyright(props) {
-    return (
-        <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {"Copyright © "}
-            <Link color="inherit" href="https://mui.com/">
-                Your Website
-            </Link>{" "}
-            {new Date().getFullYear()}
-            {"."}
-        </Typography>
-    )
-}
-
-// TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
-export default class CreateRoomPage extends Component {
+class CreateRoomPage extends Component {
     defaultVotes = 2
 
     constructor(props) {
@@ -74,7 +60,7 @@ export default class CreateRoomPage extends Component {
 
         fetch('/api/create-room', requestOptions)
             .then((response) => response.json())
-            .then((data) => console.log(data))
+            .then((data) => this.props.navigate('/room/'+data.code))
     }
 
     render() {
@@ -173,3 +159,5 @@ export default class CreateRoomPage extends Component {
         </ThemeProvider>
     }
 }
+
+export default withRouter(CreateRoomPage)
